@@ -195,6 +195,16 @@ let g:go_fmt_options = {
   - __Output paths to refresh:__ `$FilePath$`
 3. Activate your newly created file watcher in the Goland settings under "Tools" -> "Actions on save"
 
+### Goland (External tools)
+
+1. Go into the Goland settings and click "Tools" -> "External tools" then click the plus to create a new file watcher
+2. Set the following properties and confirm by clicking OK:
+  - __Name:__ `golines`
+  - __Scope:__ `Project Files`
+  - __Program:__ `golines`
+  - __Arguments:__ `$FilePath$ -w --no-reformat-tags --base-formatter=gofmt`
+
+
 ### Others
 
 Coming soon.
