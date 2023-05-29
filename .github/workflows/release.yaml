@@ -10,9 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: go mod vendor
-      - run: GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o app.exe
+      - run: GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o golines.exe
       - run: mkdir -p dist
-      - run: mv app.exe dist/
+      - run: mv golines.exe dist/
       - uses: montudor/action-zip@v1
         with:
           args: zip -qq -r dist.zip dist
