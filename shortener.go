@@ -27,6 +27,10 @@ var (
 	goDirectiveLine = regexp.MustCompile(`\s*//\s*go:.*`)
 )
 
+const (
+	formatMeNowStr = "//!!!FORMAT ME!!!"
+)
+
 // The maximum number of shortening "rounds" that we'll allow. The shortening
 // process should converge quickly, but we have this here as a safety mechanism to
 // prevent loops that prevent termination.
@@ -238,6 +242,15 @@ func (s *Shortener) annotateLongLines(lines []string) ([]string, int) {
 				CreateAnnotation(length),
 			)
 			linesToShorten++
+		}
+
+		if strings.Contains(line, formatMeNowStr) {
+			annotatedLines = append(
+				annotatedLines,
+				CreateAnnotation(length),
+			)
+			linesToShorten++
+			line = strings.ReplaceAll(line, formatMeNowStr, "")
 		}
 
 		if prevLen > -1 {
