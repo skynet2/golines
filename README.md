@@ -202,7 +202,7 @@ let g:go_fmt_options = {
   - __Name:__ `golines`
   - __Scope:__ `Project Files`
   - __Program:__ `golines`
-  - __Arguments:__ `$FilePath$ -w --no-reformat-tags --base-formatter=gofmt`
+  - __Arguments:__ `$FilePath$ -w --no-reformat-tags --base-formatter=gofmt -t 28`
 
 
 ### Others
