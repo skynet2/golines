@@ -51,7 +51,7 @@ var (
 		"List files that would be reformatted by this tool").Short('l').Default("false").Bool()
 	maxLen = kingpin.Flag(
 		"max-len",
-		"Target maximum line length").Short('m').Default("100").Int()
+		"Target maximum line length").Short('m').Default("110").Int()
 	profile = kingpin.Flag(
 		"profile",
 		"Path to profile output").Default("").String()
