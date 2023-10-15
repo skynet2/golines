@@ -6,24 +6,20 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    container: golang:1.20-alpine
+    container: golang:1.21-alpine
     steps:
       - uses: actions/checkout@v2
       - run: go mod vendor
       - run: GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o golines.exe
-      - run: mkdir -p dist
-      - run: mv golines.exe dist/
-      - uses: montudor/action-zip@v1
-        with:
-          args: zip -qq -r dist.zip dist
+      - run: GOOS=linux GOARCH=amd64 go build -ldflags "-s -w" -o golines
       - name: release
         uses: actions/create-release@v1
         id: create_release
         with:
           draft: false
           prerelease: false
-          release_name: ${{ steps.version.outputs.version }}
-          tag_name: v.0.1.${{ github.run_number }}
+          release_name: v.1.0.${{ github.run_number }}
+          tag_name: v.1.0.${{ github.run_number }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
       - name: upload windows artifact
@@ -32,6 +28,15 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: dist.zip
-          asset_name: dist.zip
+          asset_path: golines.exe
+          asset_name: golines.exe
+          asset_content_type: application/octet-stream
+      - name: upload linux artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: golines
+          asset_name: golines
           asset_content_type: application/octet-stream
