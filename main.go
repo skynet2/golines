@@ -10,9 +10,8 @@ import (
 	"runtime/pprof"
 	"strings"
 
+	"github.com/alecthomas/kingpin/v2"
 	log "github.com/sirupsen/logrus"
-	prefixed "github.com/x-cray/logrus-prefixed-formatter"
-	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
 
 const (
@@ -96,14 +95,15 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		pprof.StartCPUProfile(f)
+		if err := pprof.StartCPUProfile(f); err != nil {
+			log.Fatal(err)
+		}
 		defer pprof.StopCPUProfile()
 	}
 
-	log.SetFormatter(&prefixed.TextFormatter{
+	log.SetFormatter(&log.TextFormatter{
 		TimestampFormat: "2006-01-02 15:04:05",
 		FullTimestamp:   true,
-		ForceFormatting: true,
 	})
 
 	err := run()
@@ -211,7 +211,7 @@ func processFile(shortener *Shortener, path string) ([]byte, []byte, error) {
 
 	log.Debugf("Processing file %s", path)
 
-	contents, err := ioutil.ReadFile(path)
+	contents, err := ioutil.ReadFile(path) // #nosec G304 -- reading user-supplied paths is the tool's job
 	if err != nil {
 		return nil, nil, err
 	}
