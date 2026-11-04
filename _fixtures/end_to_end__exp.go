@@ -116,7 +116,10 @@ func longLine(
 	return "", nil
 }
 
-func shortFunc(a int, b int) error {
+func shortFunc(
+	a int,
+	b int,
+) error {
 	c := make(chan int)
 
 	for {

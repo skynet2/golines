@@ -1,6 +1,9 @@
 package fixtures
 
-func shortDec(a int, b int) int {
+func shortDec(
+	a int,
+	b int,
+) int {
 	return 5
 }
 
