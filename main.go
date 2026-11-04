@@ -33,9 +33,6 @@ var (
 	dotFile = kingpin.Flag(
 		"dot-file",
 		"Path to dot representation of AST graph").Default("").String()
-	dryRun = kingpin.Flag(
-		"dry-run",
-		"Show diffs without writing anything").Default("false").Bool()
 	ignoreGenerated = kingpin.Flag(
 		"ignore-generated",
 		"Ignore generated go files").Default("true").Bool()
@@ -226,8 +223,6 @@ func processFile(shortener *Shortener, path string) ([]byte, []byte, error) {
 func handleOutput(path string, contents []byte, result []byte) error {
 	if contents == nil {
 		return nil
-	} else if *dryRun {
-		return PrettyDiff(path, contents, result)
 	} else if *listFiles {
 		if !bytes.Equal(contents, result) {
 			fmt.Println(path)

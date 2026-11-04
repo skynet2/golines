@@ -7,10 +7,8 @@ require (
 	github.com/dave/dst v0.28.0
 	github.com/dave/jennifer v1.7.1
 	github.com/fatih/structtag v1.2.0
-	github.com/pmezard/go-difflib v1.0.0
 	github.com/sirupsen/logrus v1.10.2
 	github.com/stretchr/testify v1.12.1
-	golang.org/x/term v0.47.0
 )
 
 require (
