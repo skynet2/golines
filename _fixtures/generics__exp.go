@@ -13,7 +13,9 @@ func SumIntsOrFloats[K comparable, V int64 | float64](
 	return s
 }
 
-func SumIntsOrFloats2[K comparable, V int64 | float64](m map[K]V) V {
+func SumIntsOrFloats2[K comparable, V int64 | float64](
+	m map[K]V,
+) V {
 	var s V
 	for _, v := range m {
 		s += v

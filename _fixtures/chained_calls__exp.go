@@ -4,7 +4,11 @@ import "fmt"
 
 type Chain struct{}
 
-func (c *Chain) ChainCall(arg1 string, arg2 string, arg3 string) *Chain {
+func (c *Chain) ChainCall(
+	arg1 string,
+	arg2 string,
+	arg3 string,
+) *Chain {
 	return c
 }
 

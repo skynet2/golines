@@ -103,7 +103,5 @@ func genNodeToGraphNode() error {
 		},
 	)
 
-	f.Save("../graph_generated.go")
-
-	return nil
+	return f.Save("../graph_generated.go")
 }

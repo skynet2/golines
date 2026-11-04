@@ -88,10 +88,6 @@ By default, the tool tries to shorten lines that are longer than 100 columns
 and assumes that 1 tab = 4 columns. The latter can be changed via the
 `-m` and `-t` flags respectively.
 
-#### Dry-run mode
-
-Running the tool with the `--dry-run` flag will show pretty, git-style diffs.
-
 #### Comment shortening
 
 Shortening long comment lines is harder than shortening code because comments can

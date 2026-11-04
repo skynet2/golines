@@ -2,7 +2,13 @@ package fixtures
 
 import "fmt"
 
-func myFunc(a string, b string, c string, d string, e string)
+func myFunc(
+	a string,
+	b string,
+	c string,
+	d string,
+	e string,
+)
 
 func TestGoroutines() {
 	go myFunc(

@@ -198,7 +198,7 @@ func (s *Shortener) formatSrc(contents []byte) ([]byte, error) {
 		return format.Source(contents)
 	}
 
-	cmd := exec.Command(s.baseFormatter, s.baseFormatterArgs...)
+	cmd := exec.Command(s.baseFormatter, s.baseFormatterArgs...) // #nosec G204 -- formatter is chosen by the user via --base-formatter
 	stdinPipe, err := cmd.StdinPipe()
 	if err != nil {
 		return nil, err
@@ -215,7 +215,9 @@ func (s *Shortener) formatSrc(contents []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	stdinPipe.Close()
+	if err = stdinPipe.Close(); err != nil {
+		return nil, err
+	}
 
 	err = cmd.Wait()
 	if err != nil {
